@@ -5,8 +5,9 @@ pipeline:
   build:
     image: golang:${GO_VERSION}
     commands:
-      - go get 
+      - go get ./...
       - go test -v --race
+      - go build
 matrix:
   GO_VERSION:
     - latest
