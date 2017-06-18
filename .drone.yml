@@ -5,6 +5,7 @@ pipeline:
   build:
     image: golang:${GO_VERSION}
     commands:
+      - go get github.com/stretchr/testify/assert
       - go get ./...
       - go test -v --race
       - go build
