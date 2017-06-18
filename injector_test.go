@@ -57,7 +57,7 @@ func TestInvoke(t *testing.T) {
 	})
 
 	assert.Nil(t, err)
-	assert.Equal(t, result[0].String(), "Coucou")
+	assert.Equal(t, result[0].String(), "Coucou not working")
 
 	//alloc test if alloc free slice work
 	result, err = inj.Invoke(func(serv1 string) string {
