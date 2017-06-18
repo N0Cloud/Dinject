@@ -2,12 +2,12 @@ package dinject_test
 
 import (
 	"context"
-	"dinject"
 	"net/http"
 	"net/http/httptest"
 	"reflect"
 	"testing"
 
+	"github.com/N0Cloud/dinject"
 	"github.com/stretchr/testify/assert"
 )
 

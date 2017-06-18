@@ -51,7 +51,7 @@ func (i *injector) Reset() {
 		return
 	}
 
-	for name, _ := range i.services {
+	for name := range i.services {
 		delete(i.services, name)
 	}
 	i.args = i.args[0:0]
