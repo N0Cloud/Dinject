@@ -5,7 +5,7 @@ pipeline:
   dep:
     image: golang:${GO_VERSION}
     commands:
-      - "mkdir -p $GOPATH/{bin,src}"
+      - "mkdir -p $GOPATH/bin && echo $GOPATH"
       - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
       - "dep ensure -v"
   build:
