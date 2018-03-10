@@ -5,16 +5,17 @@ pipeline:
   dep:
     image: golang:${GO_VERSION}
     commands:
+      - "mkdir -p $GOPATH/{bin,src}"
       - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
       - "dep ensure -v"
   build:
     image: golang:${GO_VERSION}
     commands:
-      - go build
+      - "go build"
   test:
     image: golang:${GO_VERSION}
     commands:
-      - go test -v --race
+      - "go test -v --race"
 matrix:
   GO_VERSION:
     - latest
