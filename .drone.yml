@@ -2,14 +2,19 @@ workspace:
   base: /go
   path: src/github.com/N0Cloud/dinject
 pipeline:
+  dep:
+    image: golang:${GO_VERSION}
+    commands:
+      - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
+      - "dep ensure -v"
   build:
     image: golang:${GO_VERSION}
     commands:
-      - go version
-      - go get github.com/stretchr/testify/assert
-      - go get ./...
-      - go test -v --race
       - go build
+  test:
+    image: golang:${GO_VERSION}
+    commands:
+      - go test -v --race
 matrix:
   GO_VERSION:
     - latest
