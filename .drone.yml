@@ -9,14 +9,17 @@ steps:
   - name: cache
     path: /go
   commands:
-    - "mkdir -p $GOPATH/bin"
+    - "mkdir -p $GOPATH/bin $GOPATH/src/github.com/N0Cloud/dinject"
+    - "cp -R /drone/src $GOPATH/src/github.com/N0Cloud/dinject"
     - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
-    - "dep ensure -v"
+    - "cd $GOPATH/src/github.com/N0Cloud/dinject && dep ensure -v"
 - name: build
   image: golang
   volumes:
   - name: cache
     path: /go
+  depends_on:
+  - deps
   commands:
   - go build
 - name: test
@@ -24,6 +27,8 @@ steps:
   volumes:
   - name: cache
     path: /go
+  depends_on:
+  - deps
   commands:
   - "go test -v --race"
 
