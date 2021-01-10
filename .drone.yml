@@ -1,25 +1,32 @@
-workspace:
-  base: /go
-  path: src/github.com/N0Cloud/dinject
-pipeline:
-  dep:
-    image: golang:${GO_VERSION}
-    commands:
-      - "mkdir -p $GOPATH/bin"
-      - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
-      - "dep ensure -v"
-  build:
-    image: golang:${GO_VERSION}
-    commands:
-      - "go build -v"
-  test:
-    image: golang:${GO_VERSION}
-    commands:
-      - "go test -v --race"
-matrix:
-  GO_VERSION:
-    - latest
-    - "1.10"
-    - "1.9"
-    - "1.8"
-    - "1.7"
+kind: pipeline
+type: kubernetes
+name: default
+
+steps:
+- name: deps
+  image: golang
+  volumes:
+  - name: cache
+    path: /go
+  commands:
+    - "mkdir -p $GOPATH/bin"
+    - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
+    - "dep ensure -v"
+- name: build
+  image: golang
+  volumes:
+  - name: cache
+    path: /go
+  commands:
+  - go build
+- name: test
+  image: golang
+  volumes:
+  - name: cache
+    path: /go
+  commands:
+  - "go test -v --race"
+
+volumes:
+- name: cache
+  temp: {}
