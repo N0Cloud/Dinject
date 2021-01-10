@@ -10,7 +10,7 @@ steps:
     path: /go
   commands:
     - "mkdir -p $GOPATH/bin $GOPATH/src/github.com/N0Cloud/dinject"
-    - "cp -R /drone/src $GOPATH/src/github.com/N0Cloud/dinject"
+    - "cp -R /drone/src/. $GOPATH/src/github.com/N0Cloud/dinject"
     - "curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh"
     - "cd $GOPATH/src/github.com/N0Cloud/dinject && dep ensure -v"
 - name: build
