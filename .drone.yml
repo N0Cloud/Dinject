@@ -21,7 +21,7 @@ steps:
   depends_on:
   - deps
   commands:
-  - go build
+  - "cd $GOPATH/src/github.com/N0Cloud/dinject && go build"
 - name: test
   image: golang
   volumes:
@@ -30,7 +30,7 @@ steps:
   depends_on:
   - deps
   commands:
-  - "go test -v --race"
+  - "cd $GOPATH/src/github.com/N0Cloud/dinject && go test -v --race"
 
 volumes:
 - name: cache
